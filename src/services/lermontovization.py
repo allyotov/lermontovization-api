@@ -1,5 +1,8 @@
 from functools import lru_cache
 
+TEMP_RESULT_TEXT_TEMPLATE = """Говорит lermontovization-api: лермонтовизация текста сейчас находится в разработке.
+Скоро мы будем присылать вам лермонтовизированный вариант вашего текста. Пока вернём его как есть: {input_text}"""
+
 
 class LermontovizationService:
     def process_text(self, text: str) -> str:
@@ -12,7 +15,7 @@ class LermontovizationService:
 
         # пока этот метод лишь заглушка,
         # после первичной интеграции с фронтэндом, добавим сюда полноценную лермонтовизацию текста
-        return text
+        return TEMP_RESULT_TEXT_TEMPLATE.format(input_text=text)
 
 
 @lru_cache()
