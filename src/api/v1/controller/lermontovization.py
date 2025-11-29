@@ -26,3 +26,18 @@ async def lermontovizate_text(
 ) -> OutputText:
     processed_text = lermontov_service.process_text(text=input_text.text)
     return OutputText(text=processed_text)
+
+
+@lermontov_router.post(
+    "/demo-lermontovizate",
+    summary="Заказать лермонтовизацию текста",
+    description="Заказать лермонтовизацию текста",
+    status_code=http_status.HTTP_201_CREATED,
+)
+async def demo_lermontovizate_text(
+    request: Request,
+    input_text: InputText,
+    lermontov_service: LermontovizationService = Depends(get_lermontovization_service),
+) -> OutputText:
+    processed_text = lermontov_service.process_text_demo(text=input_text.text)
+    return OutputText(text=processed_text)
