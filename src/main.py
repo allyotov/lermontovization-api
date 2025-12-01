@@ -2,6 +2,7 @@ import logging
 
 import uvicorn
 from fastapi import FastAPI, status
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
 from src.router import main_router
@@ -18,6 +19,14 @@ app = FastAPI(
     docs_url="/docs/swagger",
     redoc_url="/docs/redoc",
     openapi_url="/docs/openapi.json",
+)
+
+app.add_middleware(
+    CORSMiddleware,  # type: ignore
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+    expose_headers=["*"],
 )
 
 app.include_router(main_router)
