@@ -8,12 +8,6 @@ from natasha import Doc, NewsEmbedding, NewsMorphTagger, Segmenter
 from src.services.tags import pos_of_interest, redundant_grammemes, shaping_grammemes
 
 logger = logging.getLogger(__name__)
-TEMP_RESULT_TEXT_TEMPLATE = """Говорит lermontovization-api: лермонтовизация текста сейчас находится в разработке.
-Скоро мы будем присылать вам лермонтовизированный вариант вашего текста. Пока вернём его как есть: {input_text}"""
-
-TEMP_DEMO_RESULT_TEXT_TEMPLATE = """Говорит lermontovization-api: демонстрационная лермонтовизация текста
-сейчас находится в разработке. Скоро мы будем присылать вам лермонтовизированный вариант вашего текста.
-Пока вернём его как есть: {input_text}"""
 
 
 class LermontovizationService:
