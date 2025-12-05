@@ -16,28 +16,28 @@ async def _health():
 
 
 app = FastAPI(
-    docs_url="/docs/swagger",
-    redoc_url="/docs/redoc",
-    openapi_url="/docs/openapi.json",
+    docs_url='/docs/swagger',
+    redoc_url='/docs/redoc',
+    openapi_url='/docs/openapi.json',
 )
 
 app.add_middleware(
     CORSMiddleware,  # type: ignore
-    allow_origins=["*"],
-    allow_methods=["*"],
-    allow_headers=["*"],
-    expose_headers=["*"],
+    allow_origins=['*'],
+    allow_methods=['*'],
+    allow_headers=['*'],
+    expose_headers=['*'],
 )
 
 app.include_router(main_router)
 
-app.get("/health", include_in_schema=False)(_health)
+app.get('/health', include_in_schema=False)(_health)
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     uvicorn.run(
         app,
-        host="0.0.0.0",
+        host='0.0.0.0',
         port=8000,
         log_level=logging.DEBUG,
     )
