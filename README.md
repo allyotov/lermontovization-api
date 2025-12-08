@@ -14,7 +14,7 @@
 запрос в базу данных.
 
 ## Web GUI 
-Мой коллега [Орхан](https://github.com/oashrafov) написал frontend-часть для нашего сервиса:
+Мой коллега написал frontend-часть для нашего сервиса:
 https://github.com/allyotov/lermontovization-frontend
 
 Фронтенд лермонтовизации можно запустить в отдельном Docker-контейнере. Об этом ниже.
