@@ -25,9 +25,11 @@ class LermontovizationService:
 
     def process_text(self, text: str) -> str:
         # TODO: исходный текст и его лермонтовизированный вариант должны сохраняться в базу данных.
+        # TODO: добавить обработку ошибки типа text
         return self._process_text(text_str=text)
 
     def process_text_demo(self, text: str) -> str:
+        # TODO: добавить обработку ошибки типа text
         return self._process_text(text_str=text)
 
     def _process_text(self, text_str: str) -> str:
