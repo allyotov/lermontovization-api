@@ -7,7 +7,7 @@ from src.models.text_transformation import TextTransformation
 
 
 @pytest.fixture
-def make_group_text_transformation():
+def make_text_transformation():
     def inner(
         id: UUID,
         number: int,
