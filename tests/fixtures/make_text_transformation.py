@@ -35,6 +35,7 @@ def make_text_db_record(db, make_group_text_transformation):
         if not create:
             return text_transformation
 
+        # TODO: записать компактнее, используя представление атрибутов dataclass'а как словаря:
         values = {
             'id': text_transformation.id,
             'number': text_transformation.number,
