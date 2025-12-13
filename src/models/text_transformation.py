@@ -5,6 +5,13 @@ from uuid import UUID
 
 
 @dataclass
+class NewTextTransformation:
+    original_text: str
+    transformed_text: str
+    user_id: Optional[str] = None
+
+
+@dataclass
 class TextTransformation:
     id: UUID
     number: int
