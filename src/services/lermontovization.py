@@ -1,17 +1,21 @@
 import logging
-from functools import lru_cache
 from typing import Literal
+from uuid import UUID
 
 import pymorphy2
 from natasha import Doc, NewsEmbedding, NewsMorphTagger, Segmenter
 
+from src.models.text_transformation import NewTextTransformation
+from src.repositories.text_transformations import TextTransformationsRepository
 from src.services.tags import pos_of_interest, redundant_grammemes, shaping_grammemes
 
 logger = logging.getLogger(__name__)
 
 
 class LermontovizationService:
-    def __init__(self):
+    def __init__(self, texts_repo: TextTransformationsRepository):
+        self._texts_repo = texts_repo
+
         self._morph = pymorphy2.MorphAnalyzer(lang='ru')
         insane = self._morph.parse('безумный')[0]
         unworldy = self._morph.parse('неземной')[0]
@@ -23,14 +27,16 @@ class LermontovizationService:
         self._emb = NewsEmbedding()
         self._morph_tagger = NewsMorphTagger(self._emb)
 
-    def process_text(self, text: str) -> str:
-        # TODO: исходный текст и его лермонтовизированный вариант должны сохраняться в базу данных.
+    async def process_text(self, text: str, user_id: UUID | None = None) -> str:
         # TODO: добавить обработку ошибки типа text
-        return self._process_text(text_str=text)
-
-    def process_text_demo(self, text: str) -> str:
-        # TODO: добавить обработку ошибки типа text
-        return self._process_text(text_str=text)
+        transformed_text = self._process_text(text_str=text)
+        new_text_transformation = NewTextTransformation(
+            original_text=text,
+            transformed_text=transformed_text,
+            user_id=None,
+        )
+        await self._texts_repo.add_text_transformation(new_text_transformation=new_text_transformation)
+        return transformed_text
 
     def _process_text(self, text_str: str) -> str:
         """Лермонтовизировать заданный текст.
@@ -158,8 +164,3 @@ def _apply_word_register_info(word: str, word_register_info: Literal['lowercase'
     elif word_register_info == 'capitalized':
         word = word.capitalize()
     return word
-
-
-@lru_cache()
-def get_lermontovization_service():
-    return LermontovizationService()
