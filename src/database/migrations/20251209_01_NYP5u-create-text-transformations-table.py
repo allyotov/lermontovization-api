@@ -17,8 +17,6 @@ steps = [
             created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW(),
             user_id UUID DEFAULT NULL
         );
-
-        -- Индекс для ускорения поиска по number
         CREATE INDEX idx_texts_number ON texts(number);
         """,
         """
