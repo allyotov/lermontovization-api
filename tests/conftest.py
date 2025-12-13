@@ -1,5 +1,6 @@
 pytest_plugins = [
     'tests.fixtures.repositories',
     'tests.fixtures.api_client',
-    'tests.fixtures.make_test_transformation',
+    'tests.fixtures.services',
+    'tests.fixtures.make_text_transformation',
 ]
