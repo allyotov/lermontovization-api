@@ -1,9 +1,7 @@
 services:
   postgres:
     image: postgres:18
-    env_file:
-      - .env.tests
-    container_name: postgres
+    container_name: postgres_test
     ports:
       - "${DB_PORT}:5432"
     healthcheck:
