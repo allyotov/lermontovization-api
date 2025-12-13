@@ -354,7 +354,7 @@ requires-dist = [
     { name = "pyhocon", specifier = ">=0.3.61" },
     { name = "pymorphy2", specifier = ">=0.9.1" },
     { name = "pymorphy2-dicts-ru", specifier = ">=2.4.417127.4579844" },
-    { name = "setuptools", specifier = ">=80.9.0" },
+    { name = "setuptools", specifier = "<81" },
     { name = "uvicorn", specifier = ">=0.38.0" },
     { name = "yoyo-migrations", specifier = ">=9.0.0" },
 ]
