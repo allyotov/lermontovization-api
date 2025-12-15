@@ -46,3 +46,25 @@ class TextTransformationsRepository:
         async with self.db.connection() as connection:
             rows = await connection.fetch_all(query=query)
         return [TextTransformation(**dict(row)) for row in rows]
+
+    async def soft_delete_text_transformation(self, id: UUID):
+        # TODO: добавить колонку updated_at в таблицу texts и обновлять её значение
+        # при мягком удалении и восстановлении записей;
+        query = """
+        UPDATE texts
+        SET active = false
+        WHERE id = :id;
+        """
+        values = {'id': id}
+        async with self.db.connection() as connection:
+            await connection.execute(query=query, values=values)
+
+    async def reactivate_text_transformation(self, id: UUID):
+        query = """
+        UPDATE texts
+        SET active = true
+        WHERE id = :id;
+        """
+        values = {'id': id}
+        async with self.db.connection() as connection:
+            await connection.execute(query=query, values=values)
