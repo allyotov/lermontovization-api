@@ -8,10 +8,10 @@ __depends__ = {'20251213_01_cWIyN-add-autogenerate-uuid-to-id-column'}
 
 steps = [
     step(
-        'ALTER TABLE your_table_name ADD COLUMN active BOOLEAN DEFAULT TRUE;',
+        'ALTER TABLE texts ADD COLUMN active BOOLEAN DEFAULT TRUE;',
         """
-        ALTER TABLE your_table_name ALTER COLUMN active DROP DEFAULT;
-        ALTER TABLE your_table_name DROP COLUMN active;
+        ALTER TABLE texts ALTER COLUMN active DROP DEFAULT;
+        ALTER TABLE texts DROP COLUMN active;
         """,
     ),
 ]
