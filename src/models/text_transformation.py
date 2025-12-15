@@ -9,6 +9,7 @@ class NewTextTransformation:
     original_text: str
     transformed_text: str
     user_id: Optional[str] = None
+    active: bool = True
 
 
 @dataclass
@@ -18,4 +19,5 @@ class TextTransformation:
     original_text: str
     transformed_text: str
     created_at: datetime
+    active: bool
     user_id: Optional[str] = None
