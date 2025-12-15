@@ -9,11 +9,12 @@ class TextTransformationsRepository:
     def __init__(self, *, db: Database | None = None) -> None:
         self.db = db
 
-    async def add_text_transformation(self, new_text_transformation: NewTextTransformation) -> None:
+    async def add_text_transformation(self, new_text_transformation: NewTextTransformation) -> UUID:
         if new_text_transformation.user_id is None:
             query = """
             INSERT INTO texts(original_text, transformed_text)
             VALUES (:original_text, :transformed_text)
+            RETURNING id
             """
             values = {
                 'original_text': new_text_transformation.original_text,
@@ -23,6 +24,7 @@ class TextTransformationsRepository:
             query = """
             INSERT INTO texts(original_text, transformed_text, user_id)
             VALUES (:original_text, :transformed_text, :user_id)
+            RETURNING id
             """
             values = {
                 'original_text': new_text_transformation.original_text,
@@ -30,7 +32,7 @@ class TextTransformationsRepository:
                 'user_id': new_text_transformation.user_id,
             }
         async with self.db.connection() as connection:
-            await connection.execute(query=query, values=values)
+            return await connection.execute(query=query, values=values)
 
     async def get_user_text_transformations(self, user_id: UUID | None):
         query = 'SELECT * FROM texts WHERE user_id = :user_id'
