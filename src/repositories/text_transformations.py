@@ -32,7 +32,7 @@ class TextTransformationsRepository:
         async with self.db.connection() as connection:
             await connection.execute(query=query, values=values)
 
-    async def get_text_transformations(self, user_id: UUID | None):
+    async def get_user_text_transformations(self, user_id: UUID | None):
         query = 'SELECT * FROM texts WHERE user_id = :user_id'
         values = {'user_id': user_id}
         async with self.db.connection() as connection:

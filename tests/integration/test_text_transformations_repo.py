@@ -1,13 +1,13 @@
 from src.models.text_transformation import NewTextTransformation
 
 
-async def test_get_text_transformations__returns_emty_list__if_dont_exist(text_transformations_repo):
+async def test_get_user_text_transformations__returns_emty_list__if_dont_exist(text_transformations_repo):
     guest_text_transfromations = await text_transformations_repo.get_guest_text_transformations()
 
     assert not guest_text_transfromations
 
 
-async def test_get_text_transformations__returns_1_transformation__if_exists(
+async def test_get_user_text_transformations__returns_1_transformation__if_exists(
     make_text_db_record,
     text_transformations_repo,
 ):
@@ -21,7 +21,7 @@ async def test_get_text_transformations__returns_1_transformation__if_exists(
     assert len(guest_text_transfromations) == 1
 
 
-async def test_get_text_transformations__returns_text_transformation_with_expected_original_text__if_exists(
+async def test_get_user_text_transformations__returns_text_transformation_with_expected_original_text__if_exists(
     make_text_db_record,
     text_transformations_repo,
 ):
@@ -35,7 +35,7 @@ async def test_get_text_transformations__returns_text_transformation_with_expect
     assert guest_text_transfromations[0].original_text == 'Прекрасный текст'
 
 
-async def test_get_text_transformations__returns_text_transformation_with_expected_transformed_text__if_exists(
+async def test_get_user_text_transformations__returns_text_transformation_with_expected_transformed_text__if_exists(
     make_text_db_record,
     text_transformations_repo,
 ):
